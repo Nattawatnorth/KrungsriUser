@@ -26,6 +26,11 @@
 
   let pendingPlan = null;
 
+  const ICON_SUN =
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const ICON_MOON =
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+
   /* ---------------- Theme ---------------- */
   function initTheme() {
     const saved = localStorage.getItem("prakan_theme");
@@ -37,7 +42,7 @@
     const current = document.documentElement.getAttribute("data-theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = current ? current === "dark" : prefersDark;
-    els.themeToggle.textContent = isDark ? "☀️" : "🌙";
+    els.themeToggle.innerHTML = isDark ? ICON_SUN : ICON_MOON;
   }
 
   els.themeToggle.addEventListener("click", () => {
@@ -55,12 +60,12 @@
   }
 
   function renderChips() {
-    const all = [{ key: "all", name_th: "ทั้งหมด", emoji: "✨", color: "#6c5ce7" }, ...state.categories];
+    const all = [{ key: "all", name_th: "ทั้งหมด" }, ...state.categories];
     els.chipRow.innerHTML = all
       .map(
         (c) => `
         <button class="chip ${c.key === state.category ? "active" : ""}" data-key="${c.key}" type="button">
-          <span>${c.emoji}</span><span>${c.name_th}</span>
+          <span>${c.name_th}</span>
         </button>`
       )
       .join("");
@@ -76,14 +81,14 @@
   function cardTemplate(plan, index) {
     const cat = plan.category;
     const popular = plan.is_popular
-      ? `<span class="badge-popular">🔥 ยอดนิยม</span>`
+      ? `<span class="badge-popular">ยอดนิยม</span>`
       : "<span></span>";
     const isOpen = state.expandedId === plan.id;
 
     return `
       <article class="card" style="animation-delay:${index * 60}ms" data-id="${plan.id}">
         <div class="card-top">
-          <span class="badge">${cat.emoji} ${cat.name_th}</span>
+          <span class="badge">${cat.name_th}</span>
           ${popular}
         </div>
         <div>
@@ -113,7 +118,7 @@
             </div>
           </div>
           <button class="btn-cta" data-interest="${plan.id}" type="button">
-            <span>💬 สนใจ ทักไลน์เลย</span>
+            <span>สนใจ ทักไลน์เลย</span>
           </button>
         </div>
       </article>`;
@@ -122,7 +127,7 @@
   function emptyStateTemplate() {
     return `
       <div class="empty-state">
-        <span class="emoji">🧊😅</span>
+        <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <h3>ยังไม่เจอแผนที่ตรงใจเลย</h3>
         <p>ลองเปลี่ยนหมวดหรือคำค้นหาดูอีกทีนะ</p>
         <button class="btn-reset" id="resetFilters" type="button">ล้างตัวกรองทั้งหมด</button>
@@ -210,7 +215,7 @@
       window.open(state.broker.line_url, "_blank", "noopener");
     } finally {
       els.modalLineBtn.disabled = false;
-      els.modalLineBtn.textContent = "💬 เปิดแชท LINE";
+      els.modalLineBtn.textContent = "เปิดแชท LINE";
       closeModal();
     }
   });
