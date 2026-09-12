@@ -83,7 +83,7 @@
     return `
       <article class="card" style="animation-delay:${index * 60}ms" data-id="${plan.id}">
         <div class="card-top">
-          <span class="badge" style="background:${cat.color}">${cat.emoji} ${cat.name_th}</span>
+          <span class="badge">${cat.emoji} ${cat.name_th}</span>
           ${popular}
         </div>
         <div>

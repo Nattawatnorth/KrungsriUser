@@ -1,5 +1,5 @@
 /**
- * Data layer for "ประกันชิล".
+ * Data layer for Super Broker's customer-facing catalog.
  * Flip USE_MOCK_DATA to false once the FastAPI backend is deployed —
  * every function below already talks the same shape either way, so the
  * UI code in app.js never needs to change.

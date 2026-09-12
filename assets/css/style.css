@@ -1,21 +1,27 @@
 /* ===================== Design tokens ===================== */
 :root {
-  --brand: #6c5ce7;
-  --brand-strong: #5a3ff0;
-  --brand-soft: #ece8ff;
-  --grad-a: #ff6fa5;
-  --grad-b: #ffb86b;
+  --brand: #ffc72c; /* core Super Broker yellow */
+  --brand-strong: #a87400; /* deep gold — used where yellow text needs contrast on light bg */
+  --brand-soft: #fff3cf;
+  --ink: #15130b; /* near-black, the "black" half of the brand pair */
+  --grad-a: #ffd23f;
+  --grad-b: #ffb100;
+  --hero-grad: linear-gradient(120deg, var(--ink), var(--brand) 55%, var(--grad-a));
+  --badge-bg: var(--ink);
+  --badge-text: var(--brand);
+  --popular-bg: var(--brand-soft);
+  --popular-text: #8a6300;
   --line-green: #06c755;
   --line-green-strong: #05a648;
 
-  --bg: #fafafc;
+  --bg: #fffcf3;
   --surface: #ffffff;
-  --surface-2: #f3f1fb;
-  --text: #1a1a2e;
-  --text-muted: #666677;
-  --border: #e7e4f2;
-  --shadow: 0 8px 24px rgba(76, 60, 140, 0.1);
-  --shadow-lift: 0 16px 36px rgba(76, 60, 140, 0.18);
+  --surface-2: #fff3cf;
+  --text: #15130b;
+  --text-muted: #6e6a55;
+  --border: #ede6c8;
+  --shadow: 0 8px 24px rgba(20, 18, 8, 0.1);
+  --shadow-lift: 0 16px 36px rgba(20, 18, 8, 0.18);
 
   --radius-lg: 24px;
   --radius-md: 16px;
@@ -26,13 +32,19 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #121218;
-    --surface: #1e1e28;
-    --surface-2: #262632;
-    --text: #f2f2f7;
-    --text-muted: #a6a6b8;
-    --border: #32323f;
-    --brand-soft: #2a2440;
+    --bg: #0b0b0d;
+    --surface: #1c1c1f;
+    --surface-2: #29271c;
+    --text: #fbf7ea;
+    --text-muted: #b9b4a0;
+    --border: #34311f;
+    --brand-strong: #ffc72c;
+    --brand-soft: #3a331a;
+    --hero-grad: linear-gradient(120deg, var(--brand), var(--grad-a) 55%, #fff3cf);
+    --badge-bg: var(--brand);
+    --badge-text: #15130b;
+    --popular-bg: #3a331a;
+    --popular-text: #ffd23f;
     --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     --shadow-lift: 0 16px 36px rgba(0, 0, 0, 0.5);
     color-scheme: dark;
@@ -40,13 +52,19 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #121218;
-  --surface: #1e1e28;
-  --surface-2: #262632;
-  --text: #f2f2f7;
-  --text-muted: #a6a6b8;
-  --border: #32323f;
-  --brand-soft: #2a2440;
+  --bg: #0b0b0d;
+  --surface: #1c1c1f;
+  --surface-2: #29271c;
+  --text: #fbf7ea;
+  --text-muted: #b9b4a0;
+  --border: #34311f;
+  --brand-strong: #ffc72c;
+  --brand-soft: #3a331a;
+  --hero-grad: linear-gradient(120deg, var(--brand), var(--grad-a) 55%, #fff3cf);
+  --badge-bg: var(--brand);
+  --badge-text: #15130b;
+  --popular-bg: #3a331a;
+  --popular-text: #ffd23f;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   --shadow-lift: 0 16px 36px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
@@ -139,7 +157,10 @@ img {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--brand), var(--grad-a));
+  background: var(--ink);
+  color: var(--brand);
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
   font-size: 18px;
 }
 
@@ -220,7 +241,7 @@ img {
 .hero h1 {
   font-size: clamp(28px, 7vw, 44px);
   font-weight: 700;
-  background: linear-gradient(120deg, var(--brand), var(--grad-a) 60%, var(--grad-b));
+  background: var(--hero-grad);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -311,9 +332,9 @@ img {
 }
 
 .chip.active {
-  background: linear-gradient(120deg, var(--brand), var(--grad-a));
+  background: var(--badge-bg);
   border-color: transparent;
-  color: #fff;
+  color: var(--badge-text);
   box-shadow: var(--shadow);
 }
 
@@ -423,14 +444,15 @@ img {
   font-weight: 700;
   padding: 5px 11px;
   border-radius: 999px;
-  color: #fff;
+  background: var(--badge-bg);
+  color: var(--badge-text);
 }
 
 .badge-popular {
   font-size: 12px;
   font-weight: 700;
-  color: var(--brand-strong);
-  background: var(--brand-soft);
+  color: var(--popular-text);
+  background: var(--popular-bg);
   padding: 5px 10px;
   border-radius: 999px;
 }
@@ -702,8 +724,8 @@ img {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--brand), var(--grad-a));
-  color: #fff;
+  background: var(--ink);
+  color: var(--brand);
   display: flex;
   align-items: center;
   justify-content: center;
