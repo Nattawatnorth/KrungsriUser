@@ -6,7 +6,6 @@
   --ink: #15130b; /* near-black, the "black" half of the brand pair */
   --grad-a: #ffd23f;
   --grad-b: #ffb100;
-  --hero-grad: linear-gradient(120deg, var(--ink), var(--brand) 55%, var(--grad-a));
   --badge-bg: var(--ink);
   --badge-text: var(--brand);
   --popular-bg: var(--brand-soft);
@@ -40,7 +39,6 @@
     --border: #34311f;
     --brand-strong: #ffc72c;
     --brand-soft: #3a331a;
-    --hero-grad: linear-gradient(120deg, var(--brand), var(--grad-a) 55%, #fff3cf);
     --badge-bg: var(--brand);
     --badge-text: #15130b;
     --popular-bg: #3a331a;
@@ -208,35 +206,37 @@ img {
 }
 
 /* ===================== Hero ===================== */
+/* Always a dark, spotlit stage regardless of site theme — matches the
+   Super Broker brand backdrop (black with soft overhead light beams). */
 .hero {
   position: relative;
-  padding: 44px 0 32px;
+  padding: 56px 0 40px;
   overflow: hidden;
+  background: #0a0a0c;
 }
 
-.hero-blob {
+.hero-rays {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.5;
+  inset: 0;
   z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 70% 55% at 50% -10%, rgba(255, 255, 255, 0.14), transparent 65%),
+    linear-gradient(100deg, transparent 8%, rgba(255, 255, 255, 0.06) 16%, transparent 26%),
+    linear-gradient(96deg, transparent 42%, rgba(255, 255, 255, 0.05) 50%, transparent 60%),
+    linear-gradient(106deg, transparent 66%, rgba(255, 199, 44, 0.14) 78%, transparent 92%);
 }
 
-.hero-blob.b1 {
-  width: 260px;
-  height: 260px;
-  background: var(--grad-a);
-  top: -80px;
-  right: -60px;
-}
-
-.hero-blob.b2 {
-  width: 220px;
-  height: 220px;
-  background: var(--grad-b);
-  bottom: -100px;
-  left: -70px;
-  opacity: 0.35;
+.hero-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: var(--brand);
+  filter: blur(90px);
+  opacity: 0.22;
+  top: -120px;
+  right: -80px;
+  z-index: 0;
 }
 
 .hero-content {
@@ -249,8 +249,8 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--brand-soft);
-  color: var(--brand-strong);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--brand);
   font-weight: 600;
   font-size: 13px;
   padding: 6px 14px;
@@ -261,7 +261,7 @@ img {
 .hero h1 {
   font-size: clamp(28px, 7vw, 44px);
   font-weight: 700;
-  background: var(--hero-grad);
+  background: linear-gradient(120deg, var(--brand), var(--grad-a) 55%, #fff6da);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -270,7 +270,7 @@ img {
 
 .hero p {
   margin-top: 14px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 16px;
   max-width: 480px;
   margin-left: auto;
@@ -284,7 +284,7 @@ img {
   justify-content: center;
   gap: 8px;
   font-size: 14px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .hero-hint svg {
